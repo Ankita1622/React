@@ -4,6 +4,14 @@ import Navbar from './components/Navbar';
 import TextForm from './components/TextForm'
 import About from './components/About'
 import Alert from './components/Alert'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
+
 
 import { useState } from 'react';
 
@@ -37,19 +45,21 @@ const showAlert = (message,type) => {
     setAlert(null)
    }, 1500);
 }
-  return (
-    <>
-     {/* <Navbar/> */}
-    <Navbar title = "TextUtils" aboutText = "About" mode={mode}  togglebtn={togglebtn}/>
-    <Alert alert={alert}/>
+
+return (
+  <>
+    <Router>
+      <Navbar title="TextUtils" aboutText="About" mode={mode} togglebtn={togglebtn} />
+      <Alert alert={alert} />
       <div className="container my-3">
-        <TextForm heading = "Enter the text to analyze" mode={mode} showAlert={showAlert}/>
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/" element={<TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert} />} />
+        </Routes>
       </div>
-      {/* <div className="container my-3"></div>
-      <About/>
-      <div/> */}
-    </>
-  );
+    </Router>
+  </>
+);
 }
 
 export default App;
